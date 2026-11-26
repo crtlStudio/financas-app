@@ -69,7 +69,7 @@ export function produtosDoTexto(texto) {
       nomeTexto: nome,
       preco,
       pvpr: pvpr && pvpr > preco ? pvpr : null,
-      vendidoAoKg: /^KG/i.test(m[4]),
+      vendidoAoKg: /^KG/i.test(g.unidade),
       tamanho,
       precoPorKgL: pu ? `${euros(numero(pu[1]))}/${unidade}` : null,
       condicao: oferta ? `Cada unid. fica a ${euros(numero(oferta[1]))}` : null,
