@@ -14,15 +14,20 @@ export async function atualizarLoja(loja, obter) {
     return { loja, estado: 'ok', folhetos: folhetos.length, promocoes: promocoes.length }
   } catch (e) {
     // A app mostra "folheto indisponível"; as promoções anteriores ficam (a app esconde as expiradas)
-    const anterior = await lerJson(`folhetos/${loja}/atual.json`)
-    await guardarJson(`folhetos/${loja}/atual.json`, {
-      loja,
-      estado: 'indisponivel',
-      erro: e.message,
-      atualizadoEm,
-      folhetos: anterior?.folhetos ?? [],
-      promocoes: anterior?.promocoes ?? [],
-    })
+    try {
+      const anterior = await lerJson(`folhetos/${loja}/atual.json`)
+      await guardarJson(`folhetos/${loja}/atual.json`, {
+        loja,
+        estado: 'indisponivel',
+        erro: e.message,
+        atualizadoEm,
+        folhetos: anterior?.folhetos ?? [],
+        promocoes: anterior?.promocoes ?? [],
+      })
+    } catch (erroAoGravar) {
+      // Nem o aviso se conseguiu gravar (ex.: armazenamento em baixo): fica só no resultado da tarefa
+      return { loja, estado: 'indisponivel', erro: `${e.message} (e não consegui gravar o aviso: ${erroAoGravar.message})` }
+    }
     return { loja, estado: 'indisponivel', erro: e.message }
   }
 }

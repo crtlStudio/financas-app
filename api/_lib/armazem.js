@@ -1,18 +1,19 @@
 // Guardar e ler ficheiros JSON (promoções dos folhetos).
-// - No Vercel: Vercel Blob (precisa da variável BLOB_READ_WRITE_TOKEN, criada ao ligar um Blob store ao projeto)
-// - No teu computador, sem essa variável: pasta .dados-locais/ (fora do git)
-import { put, head } from '@vercel/blob'
+// - No Vercel: Vercel Blob. Ao ligar um Blob store ao projeto, o Vercel cria BLOB_STORE_ID e as
+//   funções autenticam-se sozinhas (OIDC, sem chave fixa). Projetos antigos usam BLOB_READ_WRITE_TOKEN.
+// - No teu computador, sem essas variáveis: pasta .dados-locais/ (fora do git)
+import { put, get } from '@vercel/blob'
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 
-const usarBlob = () => Boolean(process.env.BLOB_READ_WRITE_TOKEN)
+const usarBlob = () => Boolean(process.env.BLOB_STORE_ID || process.env.BLOB_READ_WRITE_TOKEN)
 const PASTA_LOCAL = path.resolve(process.cwd(), '.dados-locais')
 
 export async function guardarJson(caminho, dados) {
   const texto = JSON.stringify(dados)
   if (usarBlob()) {
     await put(caminho, texto, {
-      access: 'public', // são promoções públicas dos folhetos, nada pessoal
+      access: 'private', // o Blob store é privado: só as nossas funções o leem (a app pede a /api/promocoes)
       contentType: 'application/json; charset=utf-8',
       addRandomSuffix: false,
       allowOverwrite: true,
@@ -29,9 +30,10 @@ export async function guardarJson(caminho, dados) {
 export async function lerJson(caminho) {
   try {
     if (usarBlob()) {
-      const { url } = await head(caminho)
-      const resposta = await fetch(url, { cache: 'no-store' })
-      return resposta.ok ? await resposta.json() : null
+      // useCache: false = ler sempre a versão mais recente (o ficheiro "atual" muda todas as semanas)
+      const resultado = await get(caminho, { access: 'private', useCache: false })
+      if (!resultado || resultado.statusCode !== 200) return null
+      return await new Response(resultado.stream).json()
     }
     return JSON.parse(await readFile(path.join(PASTA_LOCAL, caminho), 'utf8'))
   } catch {

@@ -34,3 +34,6 @@ public/dados/
 
 # Ligação local ao projeto Vercel (criada pelo "vercel link")
 .vercel
+
+.vercel
+.env*
