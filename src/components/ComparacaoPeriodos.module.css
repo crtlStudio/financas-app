@@ -1,0 +1,155 @@
+.painel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+.cabecalho {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.ajuda {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.campoCorte {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.campoCorte input {
+  width: 56px;
+  padding: 5px 8px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-h);
+}
+
+.aviso {
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: #fff7e6;
+  border: 1px solid #f5d9a1;
+  color: #7a4b00;
+  font-size: 13px;
+}
+
+.subtitulo {
+  margin: 8px 0 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-h);
+}
+
+/* ---------- Tabela ---------- */
+.tabelaScroll {
+  overflow-x: auto;
+  margin: 0 -20px;
+}
+
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+.tabela th {
+  background: var(--surface-2);
+  color: var(--text-muted);
+  font-weight: 500;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.tabela th,
+.tabela td {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+  text-align: right;
+  white-space: nowrap;
+  color: var(--text-h);
+}
+
+.tabela th:first-child,
+.tabela td:first-child {
+  text-align: left;
+  padding-left: 20px;
+  position: sticky;
+  left: 0;
+  background: var(--surface);
+}
+
+.tabela th:first-child {
+  background: var(--surface-2);
+  color: var(--text-muted);
+}
+
+.tabela th:last-child,
+.tabela td:last-child {
+  padding-right: 20px;
+}
+
+.tabela tbody tr:hover td {
+  background: var(--surface-2);
+}
+
+/* Períodos incompletos ficam esbatidos */
+.incompleto {
+  color: var(--text-muted) !important;
+  font-style: italic;
+}
+
+.colMedia {
+  font-weight: 600;
+  background: var(--accent-bg);
+}
+
+.tabela th.colMedia {
+  color: var(--accent);
+  background: var(--accent-bg);
+}
+
+.linhaTotal td {
+  font-weight: 600;
+  border-top: 1px solid var(--border);
+}
+
+.positivo {
+  color: var(--positivo) !important;
+}
+
+@media (max-width: 640px) {
+  .painel {
+    padding: 14px;
+  }
+
+  .tabelaScroll {
+    margin: 0 -14px;
+  }
+
+  .tabela th:first-child,
+  .tabela td:first-child {
+    padding-left: 14px;
+    max-width: 120px;
+    white-space: normal;
+  }
+}
+
+.negativo {
+  color: var(--negativo) !important;
+}

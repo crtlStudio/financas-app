@@ -1,0 +1,181 @@
+.fundo {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: rgba(16, 24, 40, 0.35);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 8vh 16px 16px;
+}
+
+.janela {
+  width: 100%;
+  max-width: 620px;
+  max-height: 84vh;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  background: var(--surface);
+  border-radius: 16px;
+  box-shadow: 0 24px 64px rgba(16, 24, 40, 0.25);
+}
+
+.cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.cabecalho h2 {
+  font-size: 16px;
+}
+
+.ajuda,
+.dica {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.dica {
+  font-size: 12px;
+}
+
+.fechar {
+  border: none;
+  background: none;
+  font-size: 24px;
+  line-height: 1;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0 4px;
+}
+
+.pesquisa {
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 15px;
+  color: var(--text-h);
+}
+
+.pesquisa:focus {
+  outline: 2px solid var(--accent-bg);
+  border-color: var(--accent);
+}
+
+.lista {
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-height: 120px;
+}
+
+.opcao {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding-right: 10px;
+}
+
+.opcao:hover {
+  border-color: var(--accent);
+  background: var(--accent-bg);
+}
+
+.escolhida {
+  border-color: var(--accent);
+  background: var(--accent-bg);
+}
+
+.escolher {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 12px;
+  border: none;
+  background: none;
+  text-align: left;
+  font-size: 14px;
+  color: var(--text-h);
+  cursor: pointer;
+}
+
+.categoria {
+  display: block;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.ref {
+  font-size: 11px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.verSite {
+  font-size: 12px;
+  color: var(--accent);
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.verSite:hover {
+  text-decoration: underline;
+}
+
+.erro {
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: var(--negativo-bg);
+  color: var(--negativo);
+  font-size: 13px;
+}
+
+.rodape {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Telemóvel: a janela ocupa quase o ecrã todo */
+@media (max-width: 640px) {
+  .fundo {
+    padding: 12px 8px;
+    align-items: stretch;
+  }
+
+  .janela {
+    max-height: none;
+    padding: 14px;
+  }
+
+  .opcao {
+    flex-wrap: wrap;
+    padding-bottom: 6px;
+  }
+
+  .verSite {
+    padding-left: 12px;
+  }
+}
+
+.remover {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--negativo);
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 13px;
+  cursor: pointer;
+}

@@ -1,0 +1,216 @@
+/* Barra flutuante com efeito vidro: semi-transparente e desfoca o que passa por baixo */
+.topo {
+  position: sticky;
+  top: 12px;
+  z-index: 10;
+  max-width: 1280px;
+  margin: 12px auto 0;
+  padding-inline: 24px;
+  box-sizing: border-box;
+}
+
+.interior {
+  padding: 10px 12px 10px 20px;
+  background: var(--vidro);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid var(--vidro-borda);
+  border-radius: 16px;
+  box-shadow:
+    0 8px 32px rgba(16, 24, 40, 0.08),
+    0 1px 2px rgba(16, 24, 40, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 24px;
+}
+
+@media (max-width: 860px) {
+  .topo {
+    padding-inline: 16px;
+  }
+}
+
+/* Telemóvel: barra mais compacta e controlos a ocupar a largura toda */
+@media (max-width: 640px) {
+  /* No telemóvel a barra não fica fixa: com os controlos todos ocuparia um terço do ecrã */
+  .topo {
+    position: static;
+    margin-top: 8px;
+    padding-inline: 10px;
+  }
+
+  .interior {
+    padding: 10px 12px;
+    gap: 10px;
+  }
+
+  .logo {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+  }
+
+  .titulo {
+    font-size: 17px;
+  }
+
+  .subtitulo {
+    font-size: 12px;
+  }
+
+  .direita {
+    width: 100%;
+  }
+
+  /* Datas, exportar e importar dividem a linha; o menu fica sempre visível */
+  .direita > * {
+    flex: 1 1 auto;
+  }
+
+  .botaoMenu {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .menu {
+    flex: 1 1 100%;
+  }
+
+  .dropdown {
+    left: 0;
+    right: 0;
+    min-width: 0;
+  }
+
+  .dropdown button {
+    padding: 12px;
+    font-size: 15px;
+  }
+}
+
+/* O título é um botão (volta às finanças), mas não parece um */
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-right: auto;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(31, 95, 168, 0.25);
+  flex-shrink: 0;
+}
+
+.textos {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.titulo {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  color: var(--text-h);
+}
+
+.subtitulo {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.direita {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ---------- Menu "Lista de Compras" ---------- */
+.menu {
+  position: relative;
+}
+
+.botaoMenu {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-h);
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.botaoMenu:hover {
+  background: #fff;
+  border-color: #cfd4dc;
+}
+
+/* Destaca o botão quando estás num ecrã da lista */
+.ativo {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-bg);
+}
+
+.seta {
+  font-size: 12px;
+  transition: transform 0.15s;
+}
+
+.setaAberta {
+  transform: rotate(180deg);
+}
+
+.dropdown {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 6px);
+  min-width: 180px;
+  padding: 6px;
+  background: rgba(255, 255, 255, 0.85);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(16, 24, 40, 0.14);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.dropdown button {
+  padding: 8px 12px;
+  font-size: 14px;
+  text-align: left;
+  color: var(--text-h);
+  background: none;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.dropdown button:hover {
+  background: var(--surface-2);
+}
+
+.dropdown .opcaoAtiva {
+  color: var(--accent);
+  background: var(--accent-bg);
+}

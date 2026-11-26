@@ -1,0 +1,99 @@
+/* Cores e medidas da app. Tudo o resto usa estas variáveis,
+   por isso o modo escuro só precisa de as redefinir. */
+:root {
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #f8f9fb;
+  --border: #e3e6eb;
+  --text: #5b6270;
+  --text-h: #111318;
+  --text-muted: #8a909c;
+
+  --accent: #2a78d6;
+  --accent-hover: #1f64b8;
+  --accent-bg: rgba(42, 120, 214, 0.1);
+
+  --positivo: #1a8a55;
+  --positivo-bg: rgba(26, 138, 85, 0.1);
+  --negativo: #c23b3b;
+  --negativo-bg: rgba(194, 59, 59, 0.1);
+
+  --radius: 12px;
+  --shadow: 0 1px 2px rgba(16, 24, 40, 0.04), 0 4px 12px rgba(16, 24, 40, 0.05);
+
+  /* Efeito vidro da barra de topo */
+  --vidro: rgba(255, 255, 255, 0.65);
+  --vidro-borda: rgba(255, 255, 255, 0.7);
+
+  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
+
+  font: 15px/1.5 var(--sans);
+  /* Sempre claro, mesmo com o sistema em modo escuro */
+  color-scheme: light;
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  /* No telemóvel, não deixar o browser aumentar o texto sozinho ao rodar o ecrã */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  -webkit-tap-highlight-color: transparent;
+  /* Margens seguras para ecrãs com "notch" (útil quando a app for empacotada com o Capacitor) */
+  padding: env(safe-area-inset-top, 0) env(safe-area-inset-right, 0) env(safe-area-inset-bottom, 0)
+    env(safe-area-inset-left, 0);
+}
+
+/* No telemóvel: campos com letra de 16 px (o iPhone faz zoom ao tocar em campos mais pequenos)
+   e botões com altura confortável para o dedo */
+@media (max-width: 640px) {
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+
+  button,
+  label[class*='upload'] {
+    min-height: 40px;
+  }
+}
+
+#root {
+  min-height: 100svh;
+}
+
+h1,
+h2 {
+  color: var(--text-h);
+  margin: 0;
+  font-weight: 600;
+}
+
+h1 {
+  font-size: 20px;
+  letter-spacing: -0.2px;
+}
+
+h2 {
+  font-size: 14px;
+  letter-spacing: 0.1px;
+}
+
+p {
+  margin: 0;
+}
+
+input,
+button {
+  font: inherit;
+  color: inherit;
+}

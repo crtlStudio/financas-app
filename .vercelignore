@@ -1,0 +1,11 @@
+# Ficheiros que NÃO são enviados para o Vercel no deploy
+# Chaves e variáveis locais (no Vercel ficam em Settings > Environment Variables)
+.env
+.env.*
+# Dados e testes locais
+.dados-locais
+.teste
+# Gerados no próprio Vercel durante o build
+node_modules
+dist
+public/dados

@@ -1,0 +1,93 @@
+.painel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cabecalho {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.ajuda {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.total {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.total strong {
+  font-size: 20px;
+  color: var(--positivo);
+  font-variant-numeric: tabular-nums;
+}
+
+.vazio {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.grelha {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+}
+
+.cartao {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface-2);
+}
+
+.cartao h3 {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-h);
+}
+
+.cartao p {
+  font-size: 13px;
+  line-height: 1.5;
+  flex: 1;
+}
+
+.numeros {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+.numeros strong {
+  color: var(--text-h);
+}
+
+.poupanca {
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: var(--positivo-bg);
+  color: var(--positivo);
+  font-weight: 600;
+  white-space: nowrap;
+}

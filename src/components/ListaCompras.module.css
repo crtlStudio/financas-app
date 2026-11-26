@@ -1,0 +1,341 @@
+/* Estilos partilhados pelos ecrãs "Importar lista" e "Comparação" */
+.painel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cabecalho {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.cabecalho h2 {
+  font-size: 16px;
+}
+
+.ajuda {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.vazio {
+  align-items: center;
+  text-align: center;
+  padding: 48px 24px;
+}
+
+.caixaTexto {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 14px;
+  font: 14px/1.6 var(--sans);
+  color: var(--text-h);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  resize: vertical;
+}
+
+.caixaTexto:focus {
+  outline: 2px solid var(--accent-bg);
+  border-color: var(--accent);
+}
+
+.rodape {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.erro {
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: var(--negativo-bg);
+  color: var(--negativo);
+  font-size: 14px;
+}
+
+/* ---------- Botões ---------- */
+.botaoPrincipal,
+.botaoSecundario {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 14px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+
+.botaoPrincipal {
+  color: #fff;
+  background: var(--accent);
+  border: 1px solid var(--accent);
+}
+
+.botaoPrincipal:hover {
+  background: var(--accent-hover);
+}
+
+.botaoPrincipal:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.botaoSecundario {
+  color: var(--text-h);
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+
+.botaoSecundario:hover {
+  background: var(--surface-2);
+}
+
+/* ---------- Tabela ---------- */
+.tabelaScroll {
+  overflow-x: auto;
+  margin: 0 -20px -20px;
+}
+
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.tabela th {
+  background: var(--surface-2);
+  color: var(--text-muted);
+  font-weight: 500;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  white-space: nowrap;
+}
+
+.tabela th,
+.tabela td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+}
+
+.tabela th:first-child,
+.tabela td:first-child {
+  text-align: left;
+  padding-left: 20px;
+  color: var(--text-h);
+}
+
+.tabela th:first-child {
+  color: var(--text-muted);
+}
+
+/* A coluna do produto fica fixa ao deslizar a tabela para o lado (útil no telemóvel) */
+.tabela th:first-child,
+.tabela td:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: var(--surface);
+  min-width: 110px;
+  max-width: 160px;
+}
+
+.tabela th:first-child {
+  background: var(--surface-2);
+}
+
+@media (max-width: 640px) {
+  .painel {
+    padding: 14px;
+  }
+
+  .tabelaScroll {
+    margin: 0 -14px -14px;
+  }
+
+  .tabela th:first-child,
+  .tabela td:first-child {
+    padding-left: 14px;
+    font-size: 13px;
+  }
+
+  .celula {
+    min-width: 115px;
+  }
+
+  .rodape {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.tabela tbody tr:hover td {
+  background: var(--surface-2);
+}
+
+.semPreco {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+/* ---------- Células de preço ---------- */
+.tabela td {
+  vertical-align: top;
+}
+
+.celula {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-width: 130px;
+}
+
+.preco {
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text-h);
+  font-variant-numeric: tabular-nums;
+}
+
+.precoAntigo {
+  margin-left: 6px;
+  font-weight: 400;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.etiquetaPromo {
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: #fff1e6;
+  color: #b24a00;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.detalhe {
+  display: block;
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.nomeProduto {
+  max-width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 11px;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.nomeProduto:hover {
+  text-decoration: underline;
+}
+
+.fonte {
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+.acoes {
+  display: flex;
+  gap: 8px;
+}
+
+.acoes button {
+  padding: 0;
+  border: none;
+  background: none;
+  font-size: 11px;
+  color: var(--text-muted);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.acoes button:hover {
+  color: var(--accent);
+}
+
+/* Promoção do folheto dentro de uma célula */
+.blocoFolheto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 6px 8px;
+  margin-bottom: 4px;
+  border: 1px dashed #f0b27a;
+  border-radius: 8px;
+  background: #fffaf5;
+}
+
+.condicao {
+  font-size: 10px;
+  color: #6250d6;
+  font-weight: 500;
+  text-align: center;
+}
+
+.indisponivel {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--negativo);
+}
+
+.botaoEscolher {
+  padding: 4px 12px;
+  border: 1px dashed var(--accent);
+  border-radius: 8px;
+  background: var(--accent-bg);
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.botaoEscolher:hover {
+  border-style: solid;
+}
+
+/* Loja mais barata de cada produto */
+.maisBarato {
+  background: var(--positivo-bg) !important;
+  box-shadow: inset 0 0 0 1px var(--positivo);
+}
+
+.linhaTotal td {
+  font-weight: 600;
+  border-top: 2px solid var(--border);
+}
+
+.sugestao {
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: var(--surface-2);
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.sugestaoAtiva {
+  background: var(--positivo-bg);
+  color: var(--text-h);
+}
