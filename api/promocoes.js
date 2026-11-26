@@ -7,8 +7,6 @@ const LOJAS = [
   { id: 'continente', nome: 'Continente', tratada: true },
   { id: 'pingodoce', nome: 'Pingo Doce', tratada: true },
   { id: 'auchan', nome: 'Auchan', tratada: true },
-  { id: 'mercadona', nome: 'Mercadona', tratada: false, mensagem: 'O Mercadona não publica folhetos semanais.' },
-  { id: 'intermarche', nome: 'Intermarché', tratada: false, mensagem: 'Folheto indisponível: o site bloqueia acessos automáticos.' },
 ]
 
 export default async function handler(req, res) {

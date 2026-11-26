@@ -9,7 +9,7 @@ import { atualizarContinente } from '../_lib/folhetos/atualizarContinente.js'
 import { atualizarPingoDoce } from '../_lib/folhetos/atualizarPingoDoce.js'
 import { atualizarAuchan } from '../_lib/folhetos/atualizarAuchan.js'
 
-// Lojas com folheto tratado (Mercadona não tem folheto; Intermarché bloqueia acessos automáticos)
+// Lojas com folheto tratado
 const ATUALIZADORES = [atualizarLidl, atualizarContinente, atualizarPingoDoce, atualizarAuchan]
 
 export default async function handler(req, res) {

@@ -12,7 +12,7 @@ const LEITORES = {
 }
 
 // Preços online parciais: mostramos "sem dados" em vez de inventar
-const LOJAS_SEM_DADOS = ['lidl', 'mercadona']
+const LOJAS_SEM_DADOS = ['lidl']
 
 export default async function handler(req, res) {
   const loja = String(req.query.loja ?? '').toLowerCase()

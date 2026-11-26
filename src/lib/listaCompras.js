@@ -10,7 +10,6 @@ export const LOJAS = [
   { id: 'pingodoce', nome: 'Pingo Doce', estado: 'ativo' },
   { id: 'auchan', nome: 'Auchan', estado: 'ativo' },
   { id: 'lidl', nome: 'Lidl', estado: 'folheto' },
-  { id: 'mercadona', nome: 'Mercadona', estado: 'sem dados' },
 ]
 
 // Transforma o texto (um produto por linha) numa lista limpa.
