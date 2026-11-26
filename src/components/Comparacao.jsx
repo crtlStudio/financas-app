@@ -2,7 +2,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { LOJAS } from '../lib/listaCompras'
 import { carregarAssociacoes, guardarAssociacoes, chaveDoItem, obterPreco, esquecerPreco } from '../lib/precos'
-import { sugerirLojas } from '../lib/compararLojas'
+import { sugerirLojas, ordenarLojas } from '../lib/compararLojas'
 import { carregarPromocoes, procurarPromocao, precoParaComparar } from '../lib/promocoes'
 import EscolherProduto from './EscolherProduto'
 import styles from './ListaCompras.module.css'
@@ -115,6 +115,8 @@ export default function Comparacao({ lista, irParaImportar }) {
     lista.map((item) => [item, Object.fromEntries(LOJAS.map((l) => [l.id, precoDe(item, l)]))]),
   )
   const sugestao = sugerirLojas(lista, precos, LOJAS)
+  // Colunas ordenadas: a loja mais barata fica mais à esquerda
+  const lojas = ordenarLojas(lista, precos, LOJAS)
 
   return (
     <section className={styles.painel}>
@@ -139,19 +141,19 @@ export default function Comparacao({ lista, irParaImportar }) {
           <thead>
             <tr>
               <th>Produto</th>
-              {LOJAS.map((loja) => (
+              {lojas.map((loja) => (
                 <th key={loja.id}>{loja.nome}</th>
               ))}
             </tr>
           </thead>
           <tbody>
             {lista.map((item, i) => {
-              const valores = LOJAS.map((l) => precos[item][l.id]).filter((v) => typeof v === 'number')
+              const valores = lojas.map((l) => precos[item][l.id]).filter((v) => typeof v === 'number')
               const minimo = valores.length >= 2 ? Math.min(...valores) : null
               return (
                 <tr key={i}>
                   <td>{item}</td>
-                  {LOJAS.map((loja) => (
+                  {lojas.map((loja) => (
                     <td key={loja.id} className={minimo !== null && precos[item][loja.id] === minimo ? styles.maisBarato : ''}>
                       <Celula
                         loja={loja}
@@ -171,7 +173,7 @@ export default function Comparacao({ lista, irParaImportar }) {
           <tfoot>
             <tr className={styles.linhaTotal}>
               <td>Total</td>
-              {LOJAS.map((loja) => {
+              {lojas.map((loja) => {
                 const comPreco = lista.filter((item) => typeof precos[item][loja.id] === 'number')
                 const total = comPreco.reduce((s, item) => s + precos[item][loja.id], 0)
                 return (

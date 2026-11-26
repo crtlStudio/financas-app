@@ -56,3 +56,19 @@ export function sugerirLojas(itens, precos, lojas) {
     texto: `Compensa ir só ao ${melhor.loja.nome}: ${euro(melhor.total)}. Dividir por duas lojas pouparia apenas ${euro(Math.max(0, poupanca))}.${notaDeFora}`,
   }
 }
+
+// Ordena as lojas da mais barata para a mais cara (para a tabela: a mais barata fica à esquerda).
+// Usa a mesma regra justa da sugestão: só conta os produtos com preço em todas as lojas que têm preços.
+// Lojas sem nenhum preço ficam no fim, pela ordem original.
+export function ordenarLojas(itens, precos, lojas) {
+  const temPreco = (item, loja) => typeof precos[item]?.[loja.id] === 'number'
+  const comPrecos = lojas.filter((l) => itens.some((i) => temPreco(i, l)))
+  const semPrecos = lojas.filter((l) => !comPrecos.includes(l))
+
+  const comparaveis = itens.filter((i) => comPrecos.every((l) => temPreco(i, l)))
+  if (comPrecos.length < 2 || comparaveis.length === 0) return [...comPrecos, ...semPrecos]
+
+  const total = (l) => soma(comparaveis.map((i) => precos[i][l.id]))
+  // sort é estável: em caso de empate mantém-se a ordem original
+  return [...[...comPrecos].sort((a, b) => total(a) - total(b)), ...semPrecos]
+}

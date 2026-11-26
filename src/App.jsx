@@ -168,6 +168,7 @@ export default function App() {
 
   return (
     <>
+  
       <Cabecalho subtitulo={subtitulo} vista={vista} mudarVista={setVista}>
         {/* As datas e o botão de importar só aparecem no ecrã das finanças */}
         {vista === 'financas' && temDados && (

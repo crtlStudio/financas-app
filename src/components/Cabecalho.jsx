@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 import styles from './Cabecalho.module.css'
 
 // children = o que a página atual quer mostrar no topo (datas, botão de importar extrato)
-export default function Cabecalho({ subtitulo, vista, mudarVista, children }) {
+export default function Cabecalho({ vista, mudarVista, children }) {
   const [menuAberto, setMenuAberto] = useState(false)
   const menuRef = useRef(null)
 
@@ -43,7 +43,6 @@ export default function Cabecalho({ subtitulo, vista, mudarVista, children }) {
           <img className={styles.logo} src="/logo.png" alt="" width="40" height="40" />
           <span className={styles.textos}>
             <span className={styles.titulo}>As minhas finanças</span>
-            <span className={styles.subtitulo}>{subtitulo}</span>
           </span>
         </button>
 

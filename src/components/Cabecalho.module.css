@@ -46,19 +46,21 @@
     gap: 10px;
   }
 
-  .logo {
-    width: 32px;
-    height: 32px;
-    border-radius: 8px;
+  /* ".marca ..." para ganhar às regras normais, que estão mais abaixo no ficheiro */
+  .marca .logo {
+    width: 34px;
+    height: 34px;
   }
 
-  .titulo {
+  /* Como o título da barra de navegação do iPhone: 17 px, semi-negrito */
+  .marca .titulo {
     font-size: 17px;
-    border: 1px solid black;
+    letter-spacing: -0.43px;
   }
 
-  .subtitulo {
+  .marca .subtitulo {
     font-size: 12px;
+    letter-spacing: 0;
   }
 
   .direita {
@@ -70,45 +72,85 @@
     flex: 1 1 auto;
   }
 
-  .botaoMenu {
-    width: 100%;
-    justify-content: center;
-  }
-
   .menu {
     flex: 1 1 100%;
   }
 
-  .dropdown {
+  /* ".menu ..." para ganhar às regras normais, que estão mais abaixo no ficheiro.
+     44 px de altura: o mínimo que a Apple recomenda para tocar com o dedo */
+  .menu .botaoMenu {
+    width: 100%;
+    min-height: 44px;
+    justify-content: center;
+    font-size: 15px;
+    border-radius: 12px;
+  }
+
+  .menu .dropdown {
     left: 0;
     right: 0;
     min-width: 0;
+    border-radius: 14px;
   }
 
-  .dropdown button {
-    padding: 12px;
-    font-size: 15px;
+  .menu .dropdown button {
+    min-height: 44px;
+    padding: 12px 14px;
+    font-size: 16px;
+    border-radius: 10px;
+  }
+
+  /* Ao tocar numa opção, fica marcada como nos menus do iPhone */
+  .menu .dropdown button:active {
+    background: rgba(120, 120, 128, 0.16);
   }
 }
 
-/* O título é um botão (volta às finanças), mas não parece um */
+/* O título é um botão (volta às finanças), ao estilo das apps de iPhone:
+   letra do sistema da Apple, logo com cantos de ícone iOS e, ao tocar, fica mais claro */
 .marca {
   display: flex;
   align-items: center;
   gap: 12px;
   margin-right: auto;
-  padding: 0;
+  padding: 4px 8px 4px 4px;
+  margin-left: -4px;
   border: none;
+  border-radius: 14px;
   background: none;
   cursor: pointer;
   text-align: left;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', var(--sans);
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+  transition: opacity 0.2s ease, background 0.2s ease;
 }
 
+@media (hover: hover) {
+  .marca:hover {
+    background: rgba(120, 120, 128, 0.08);
+  }
+}
+
+.marca:active {
+  opacity: 0.55;
+  transition-duration: 0s;
+}
+
+.marca:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Cantos como os dos ícones do iPhone (~22% do tamanho) e um contorno muito fino */
 .logo {
   width: 40px;
   height: 40px;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(31, 95, 168, 0.25);
+  border-radius: 22.5%;
+  box-shadow:
+    0 0 0 0.5px rgba(0, 0, 0, 0.08),
+    0 2px 6px rgba(31, 95, 168, 0.22);
   flex-shrink: 0;
 }
 
@@ -116,18 +158,28 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  gap: 1px;
 }
 
 .titulo {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', var(--sans);
   font-size: 20px;
   font-weight: 600;
-  letter-spacing: -0.2px;
+  line-height: 1.2;
+  letter-spacing: -0.45px;
   color: var(--text-h);
+  padding: 3px 7px;
+  border-radius: 8px;
+  background: rgba(236, 233, 233, 0.7);
+  box-shadow: 0px 0 8px 1px rgba(3, 54, 102, 0.192);
 }
 
+/* Cinzento secundário do iOS */
 .subtitulo {
   font-size: 13px;
-  color: var(--text-muted);
+  line-height: 1.25;
+  letter-spacing: -0.08px;
+  color: #8e8e93;
 }
 
 .direita {
