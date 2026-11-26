@@ -11,8 +11,12 @@
 
 import { euros, capitalizar } from './texto.js'
 
-// Início de um produto: [PVPR X €] euros [cêntimos] € [,] UNIDADE
-const PRECO = /(?:PVPR\s+(\d+(?:[.,]\d{1,2})?)\s*€\s+)?(\d+)(?:\s+(\d{2}))?\s*€\s*,?\s*(UNID\.?|KG\.?|EMB\.?|CX\.?|PACK\.?)(?=\s)/g
+// Início de um produto: [preço antigo €] preço € [,] UNIDADE
+//  - Preço antigo: "PVPR 27,99 €" ou só "11,99 €" (ex.: "Desconto Direto 11,99 € 8 99 € , KG").
+//    Sem "PVPR" tem de ter cêntimos e não pode ser a oferta do produto anterior ("FICA A 1,50 €").
+//  - Preço: "8 99 € , KG" (euros cêntimos) ou, em algumas páginas, ao contrário: "99 € 12 , KG" (= 12,99 €)
+const PRECO =
+  /(?<![\d.,])(?:(?:PVPR\s+(?<pvpr>\d+(?:[.,]\d{1,2})?)|(?<!FICA\s+A\s+)(?<antigo>\d+,\d{2}))\s*€\s+)?(?:(?<euros>\d+)(?:\s+(?<cents>\d{2}))?\s*€|(?<centsAntes>\d{2})\s*€\s+(?<eurosDepois>\d+))\s*,?\s*(?<unidade>UNID\.?|KG\.?|EMB\.?|CX\.?|PACK\.?)(?=\s)/g
 const POR_UNIDADE = /(\d+(?:[.,]\d+)?)\s*€\s*\/\s*(KG|L|LT|UN|UNID|DOSE|M)\b/i
 const TAMANHO = /EMB\.?\s*:?\s*((?:\d+\s*X\s*)?\d+(?:[.,]\d+)?\s*(?:KG|G|GR|ML|CL|L|LT|UN|UNID\.?|DOSES?|M|ROLOS|SAQUETAS|CÁPSULAS)\b(?:\s*\/\s*(?:\d+\s*X\s*)?\d+(?:[.,]\d+)?\s*(?:KG|G|GR|ML|CL|L|LT|UN|UNID\.?))?)/i
 const OFERTA = /UNID\.?\s+FICA\s+A\s+(\d+(?:,\d+)?)\s*€/i
@@ -39,8 +43,10 @@ export function produtosDoTexto(texto) {
     const fim = i + 1 < inicios.length ? inicios[i + 1].index : texto.length
     const corpo = texto.slice(m.index + m[0].length, fim).trim()
 
-    const preco = numero(`${m[2]}.${m[3] ?? '00'}`)
-    const pvpr = m[1] ? numero(m[1]) : null
+    const g = m.groups
+    const preco = g.euros ? numero(`${g.euros}.${g.cents ?? '00'}`) : numero(`${g.eurosDepois}.${g.centsAntes}`)
+    const antigo = g.pvpr ?? g.antigo
+    const pvpr = antigo ? numero(antigo) : null
     if (!(preco > 0)) return
 
     // Tira restos de frases de campanha no fim ("... de Mais", "... Até")
